@@ -327,11 +327,9 @@ remix_player_process (RemixEnv *env, RemixBase *base, RemixCount count,
    RemixPlayerData *player_data = remix_base_get_instance_data(env, base);
 
    if (!player_data) return 0;
-
-   if (!player_data->handle) remix_player_open_device (env, base);
-
    if ((!player_data->snd_on) || (!player_data->tch_snd_on)
-         || (player_data->vrecord_on) || (player_data->all_sound_off)) return count;
+       || (player_data->vrecord_on) || (player_data->all_sound_off)) return count;
+   if (!player_data->handle) remix_player_open_device (env, base);
 
    nr_channels = remix_stream_nr_channels (env, input);
 
